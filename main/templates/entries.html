@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation to Person</title>
+</head>
+<body>
+    <br>
+    <h1>Donation to Person</h1>
+    <h2>What do you really need?</h2>
+    <br>
+    <form action="{{url_for('add_entry')}}" method=post>
+        <p>Name <input type="text" name="name" maxlength="20">*Type in your name.</p>
+        <p>Address <input type="text" name="address" maxlength="20">*Type in your address.</p>
+        <p>Need <input type="text" name="need" maxlength="20">*Type in what you need.</p>
+        <p><input type="submit" value="Send"></p>
+    </form>
+    <br>
+    <h3>[History]</h3>
+    <ul class="entries">
+    {% for entry in entries %}
+        <li>Name:{{entry.name}} / Address:{{entry.address}} / Need:{{entry.need}}</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

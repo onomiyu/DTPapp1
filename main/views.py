@@ -1,6 +1,16 @@
 import flask
-from main import app
+from main import app, db
+from main.models import Entry
+
 
 @app.route('/')
 def show_entries():
-    return 'Hello,World'
+    entries = Entry.query.all()
+    return flask.render_template('entries.html', entries=entries)
+
+@app.route('/add', methods=['POST'])
+def add_entry():
+   entry = Entry(name = flask.request.form['name'],address = flask.request.form['address'],need = flask.request.form['need'])
+   db.session.add(entry)
+   db.session.commit()
+   return flask.redirect(flask.url_for('show_entries'))
